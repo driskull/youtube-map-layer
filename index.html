@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <title>Simple Map</title>
+    <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/esri/css/esri.css">
+    <link rel="stylesheet" href="css/YoutubeLayer.css">
+    <style>
+      html, body, #map {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: #FFF;
+        overflow: hidden;
+        font-family: "Trebuchet MS";
+      }
+    </style>
+    <script type="text/javascript">
+    var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+    var dojoConfig = {
+    	//The location.pathname.replace() logic below may look confusing but all its doing is 
+    	// enabling us to load the api from a CDN and load local modules from the correct location.
+        packages:[
+        { 
+            name: "application",
+            location: package_path + '/js' 
+         },
+         { 
+            name: "modules",
+            location: package_path + '/js' 
+         },
+         { 
+            name: "views",
+            location: package_path + '/views' 
+         },{
+            name: "config",
+            location: package_path + '/config'                     
+         }
+        ]
+    };
+    </script>
+    <script src="http://js.arcgis.com/3.9/"></script>
+    <script>
+      var map;
+
+      require(["esri/map", "modules/YouTubeLayer", "dojo/domReady!"], function(Map, YouTubeLayer) {
+        map = new Map("map", {
+          basemap: "topo",
+          center: [-122.45,37.75], // long, lat
+          zoom: 13,
+          sliderStyle: "small"
+        });
+        
+        var layer = new YouTubeLayer({
+            map: map,
+            key: 'AI39si5AmNrzX3VKNKo4Kcet9BVemrvyjl4B13ezBbNLsvKOlw9Vh3eL_57dZ2vC6M9PwV9i3bHm6emtZLr_BhQ8qtnTbvwzCw'
+        });
+
+        
+        
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+  </body>
+</html>
